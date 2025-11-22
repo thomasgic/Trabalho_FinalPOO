@@ -12,6 +12,7 @@ public class CentralFornecimento {
 
     public boolean CadastraFornecedor(Fornecedor fornecedor){
         fornecedores.add(fornecedor);
+        Collections.sort(fornecedores);
         return true;
     }
 
