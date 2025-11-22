@@ -1,7 +1,7 @@
 package GUI;
-import Dados.Area;
-import Dados.CentralFornecimento;
-import Dados.Fornecedor;
+import entidades.Area;
+import entidades.CentralFornecimento;
+import entidades.Fornecedor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

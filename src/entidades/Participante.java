@@ -1,4 +1,4 @@
-package Dados;
+package entidades;
 
 public abstract class Participante {
     private long cod;

@@ -1,4 +1,4 @@
-package Dados;
+package entidades;
 
 import java.util.ArrayList;
 import java.util.Collections;

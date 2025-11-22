@@ -1,4 +1,4 @@
-package Dados;
+package entidades;
 
 public enum Area {
     TI("TI"), ANDROIDES("Androides"), EMERGENTE("Emergente"), ALIMENTOS("Alimentos");
