@@ -1,0 +1,133 @@
+package GUI;
+import Dados.Area;
+import Dados.CentralFornecimento;
+import Dados.Fornecedor;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+
+public class PainelFornecedor {
+    private JPanel principal;
+    private JTextField campoDigitaCod;
+    private JPanel CampoDigitDados;
+    private JButton confirmarButton;
+    private JButton cancelarButton;
+    private JPanel painelBotoes;
+    private JPanel painelMostraDados;
+    private JTextArea areaMensagens;
+    private JButton limparButton;
+    private JButton mostrarButton;
+    private JLabel instrucao;
+    private JTextField campoDigitaNome;
+    private JTextField campoDigitaArea;
+    private JTextField campoDigitaFund;
+    private CentralFornecimento centralFornecimento;
+
+    public PainelFornecedor () {
+        centralFornecimento = new CentralFornecimento();
+        tratamentoEventos();
+    }
+
+    public void tratamentoEventos() {
+
+        confirmarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                try {
+
+                    String nome = campoDigitaNome.getText();
+                    String fundacao = campoDigitaFund.getText();
+                    String area = campoDigitaArea.getText().toUpperCase();
+                    String codTexto = campoDigitaCod.getText();
+
+                    if (nome.isEmpty() || fundacao.isEmpty() || area.isEmpty() || codTexto.isEmpty())
+                        areaMensagens.setText("ERRO: Preencha todos os campos!");
+                    else {
+
+                        long codLong = Long.parseLong(codTexto);
+                        if (centralFornecimento.verificaCod(codLong) != null) {
+                            areaMensagens.setText("ERRO: código já existente!");
+                            campoDigitaCod.setText("");
+                        } else {
+                            SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+                            Date fundacaoFormatado = formatoData.parse(fundacao);
+
+                            Area areaFormatado = Area.valueOf(area);
+
+                            Fornecedor fornecedor = new Fornecedor(nome, codLong, areaFormatado, fundacaoFormatado);
+                            if (centralFornecimento.CadastraFornecedor(fornecedor)) {
+                                areaMensagens.setText("");
+                                areaMensagens.append("Fornecedor cadastrado com sucesso!");
+                                campoDigitaNome.setText("");
+                                campoDigitaArea.setText("");
+                                campoDigitaFund.setText("");
+                                campoDigitaCod.setText("");
+                            }
+                        }
+                    }
+                }
+
+                catch(ParseException f){
+                        areaMensagens.setText("Erro: Formato de data inválido!" + "\nFormato aceito: dd/mm/aaaa");
+                    }
+                catch(NumberFormatException f){
+                        areaMensagens.setText("Erro: código apenas com valores numéricos!");
+                    }
+
+                catch (IllegalArgumentException f){
+                    areaMensagens.setText("Erro: Área inválida" + "\n Áreas válidas:" +  "\nTI" + "\nANDROIDES" + "\nEMERGENTE" + "\nALIMENTOS");
+                }
+
+                catch(Exception f){
+                        areaMensagens.setText("Erro: algo deu errado!");
+                    }
+                }
+        });
+
+        limparButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                areaMensagens.setText("");
+                campoDigitaNome.setText("");
+                campoDigitaArea.setText("");
+                campoDigitaFund.setText("");
+                campoDigitaCod.setText("");
+            }
+        });
+
+        mostrarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                areaMensagens.setText("");
+                ArrayList<Fornecedor> fornecedores = centralFornecimento.mostraFornecedores();
+                if (fornecedores.isEmpty()) {
+                    areaMensagens.setText("não existem fornecedores cadastrados");
+                } else {
+                    for (Fornecedor f : fornecedores) {
+                        areaMensagens.append(f.geraDescricao() + "\n");
+                    }
+                }
+            }
+        });
+
+        cancelarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                Window principal = SwingUtilities.getWindowAncestor(cancelarButton);
+                principal.dispose();
+            }
+        });
+
+    }
+    public JPanel getPainel(){
+        return principal;
+    }
+
+}
