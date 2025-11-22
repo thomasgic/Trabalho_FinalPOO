@@ -3,6 +3,8 @@ package aplicacao;
 import GUI.JanelaPrincipal;
 import entidades.CentralFornecimento;
 
+//Classe de aplicação
+
 public class ACMETech {
     private JanelaPrincipal janelaPrincipal;
     private CentralFornecimento centralFornecimento;
@@ -12,6 +14,6 @@ public class ACMETech {
     }
 
     public void executar(){
-        janelaPrincipal = new JanelaPrincipal(centralFornecimento);
+        janelaPrincipal = new JanelaPrincipal(this);
     }
 }
