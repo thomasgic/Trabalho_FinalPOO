@@ -46,7 +46,7 @@ public class Fornecedor extends Participante implements Comparable<Fornecedor> {
 
     @Override
     public String geraDescricao () {
-        SimpleDateFormat formatoData = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         String dataFundacao = formatoData.format(fundacao);
         return "nome: " + getNome() +
                ";código: " + getCod() +
