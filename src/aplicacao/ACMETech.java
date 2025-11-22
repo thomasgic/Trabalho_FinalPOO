@@ -16,4 +16,8 @@ public class ACMETech {
     public void executar(){
         janelaPrincipal = new JanelaPrincipal(this);
     }
+
+    public CentralFornecimento getCentralFornecimento () {
+        return centralFornecimento;
+    }
 }

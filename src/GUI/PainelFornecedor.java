@@ -1,4 +1,5 @@
 package GUI;
+import aplicacao.ACMETech;
 import entidades.Area;
 import entidades.CentralFornecimento;
 import entidades.Fornecedor;
@@ -28,10 +29,10 @@ public class PainelFornecedor {
     private JTextField campoDigitaNome;
     private JTextField campoDigitaArea;
     private JTextField campoDigitaFund;
-    private CentralFornecimento centralFornecimento;
+    private ACMETech acmeTech;
 
     public PainelFornecedor () {
-        centralFornecimento = new CentralFornecimento();
+        acmeTech = new ACMETech();
         tratamentoEventos();
     }
 
@@ -52,7 +53,7 @@ public class PainelFornecedor {
                     else {
 
                         long codLong = Long.parseLong(codTexto);
-                        if (centralFornecimento.verificaCod(codLong) != null) {
+                        if (acmeTech.getCentralFornecimento().verificaCod(codLong) != null) {
                             areaMensagens.setText("ERRO: código já existente!");
                             campoDigitaCod.setText("");
                         } else {
@@ -62,7 +63,7 @@ public class PainelFornecedor {
                             Area areaFormatado = Area.valueOf(area);
 
                             Fornecedor fornecedor = new Fornecedor(nome, codLong, areaFormatado, fundacaoFormatado);
-                            if (centralFornecimento.CadastraFornecedor(fornecedor)) {
+                            if (acmeTech.getCentralFornecimento().CadastraFornecedor(fornecedor)) {
                                 areaMensagens.setText("");
                                 areaMensagens.append("Fornecedor cadastrado com sucesso!");
                                 campoDigitaNome.setText("");
@@ -106,7 +107,7 @@ public class PainelFornecedor {
             @Override
             public void actionPerformed (ActionEvent e) {
                 areaMensagens.setText("");
-                ArrayList<Fornecedor> fornecedores = centralFornecimento.mostraFornecedores();
+                ArrayList<Fornecedor> fornecedores = acmeTech.getCentralFornecimento().mostraFornecedores();
                 if (fornecedores.isEmpty()) {
                     areaMensagens.setText("não existem fornecedores cadastrados");
                 } else {
