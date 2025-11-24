@@ -21,6 +21,7 @@ public class PainelInicial {
     public PainelInicial(JanelaPrincipal janelaPrincipal){
     this.janelaPrincipal = janelaPrincipal;
     tratamentoDeEventos();
+
     }
 
 
@@ -33,6 +34,13 @@ public class PainelInicial {
             @Override
             public void actionPerformed (ActionEvent e) {
                 janelaPrincipal.mudaTela(1);
+            }
+        });
+
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                janelaPrincipal.dispose();
             }
         });
     }

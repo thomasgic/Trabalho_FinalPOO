@@ -77,4 +77,15 @@ public class Tecnologia {
     public void defineFornecedor(Fornecedor f){
         this.fornecedor = f;
     }
+
+    @Override
+    public String toString () {
+        return "id: " + id +
+                ";fornecedor: " + fornecedor +
+                ";Modelo: " + Modelo +
+                ";descricao: " + descricao +
+                ";valorBase: " + valorBase +
+                ";peso: " + peso +
+                ";temperatura: " + temperatura;
+    }
 }

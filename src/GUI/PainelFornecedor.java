@@ -1,7 +1,6 @@
 package GUI;
 import aplicacao.ACMETech;
 import entidades.Area;
-import entidades.CentralFornecimento;
 import entidades.Fornecedor;
 
 import java.text.ParseException;
@@ -14,25 +13,32 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class PainelFornecedor {
+public class PainelFornecedor extends JDialog {
+
     private JPanel principal;
-    private JTextField campoDigitaCod;
     private JPanel CampoDigitDados;
-    private JButton confirmarButton;
-    private JButton cancelarButton;
     private JPanel painelBotoes;
     private JPanel painelMostraDados;
-    private JTextArea areaMensagens;
+    private JLabel instrucaoCod;
+    private JLabel instrucaoArea;
+    private JLabel instrucaoData;
+    private JLabel instrucaoNome;
+    private JTextField campoDigitaCod;
+    private JButton confirmarButton;
+    private JButton cancelarButton;
     private JButton limparButton;
     private JButton mostrarButton;
-    private JLabel instrucao;
+    private JTextArea areaMensagens;
     private JTextField campoDigitaNome;
     private JTextField campoDigitaArea;
     private JTextField campoDigitaFund;
+
     private ACMETech acmeTech;
 
-    public PainelFornecedor () {
-        acmeTech = new ACMETech();
+    public PainelFornecedor (ACMETech acmeTech) {
+        setContentPane(principal);
+        setModal(true);
+        this.acmeTech = acmeTech;
         tratamentoEventos();
     }
 
@@ -121,8 +127,7 @@ public class PainelFornecedor {
         cancelarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                Window principal = SwingUtilities.getWindowAncestor(cancelarButton);
-                principal.dispose();
+                dispose();
             }
         });
 
