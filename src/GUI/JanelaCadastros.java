@@ -22,7 +22,6 @@ public class JanelaCadastros {
         this.acmeTech = acmeTech;
         this.janelaPrincipal = janelaPrincipal;
         tratamentoDeEventos();
-
     }
 
     public void tratamentoDeEventos(){
@@ -54,6 +53,14 @@ public class JanelaCadastros {
             @Override
             public void actionPerformed (ActionEvent e) {
             janelaPrincipal.mudaTela(0);
+            }
+        });
+
+        CADASTRARVENDAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                PainelVenda painelVenda = new PainelVenda(acmeTech);
+                abrirDialog(painelVenda);
             }
         });
 
