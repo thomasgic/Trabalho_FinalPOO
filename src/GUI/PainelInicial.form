@@ -63,7 +63,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="CONSULTAR MAIOR..."/>
+          <text value="CONSULTAR"/>
         </properties>
       </component>
       <component id="ffa6" class="javax.swing.JButton" binding="salvaButton">

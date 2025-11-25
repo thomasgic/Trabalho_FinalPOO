@@ -6,21 +6,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JanelaRelatorios {
-    private JButton tecnologiasButton;
-    private JButton fornecedoresButton;
-    private JButton compradoresButton;
-    private JButton vendasButton;
-    private JTextArea resultadoRelatorioTA;
-    private JLabel relatoriosLabel;
+public class JanelaConsultas extends JDialog{
     private JPanel principal;
-    private JPanel painelBotoes;
-    private JPanel painelMostraRelatorios;
+    private JButton maiorValorTecButton;
+    private JButton compradorMaisVendasButton;
+    private JButton fornecedorMaisTecButton;
+    private JButton vendaMaiorValorButton;
+    private JTextArea resultadoConsultasTA;
+    private JLabel consultasLabel;
     private JButton voltarButton;
-    private JanelaPrincipal janelaPrincipal;
     private ACMETech acmeTech;
+    private JanelaPrincipal janelaPrincipal;
 
-    public JanelaRelatorios(JanelaPrincipal janelaPrincipal, ACMETech acmeTech){
+    public JanelaConsultas(JanelaPrincipal janelaPrincipal, ACMETech acmeTech){
+        super();
+        setContentPane(principal);
+        setModal(true);
         this.acmeTech = acmeTech;
         this.janelaPrincipal = janelaPrincipal;
         voltarButton.addActionListener(new ActionListener() {

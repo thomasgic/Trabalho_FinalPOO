@@ -21,7 +21,6 @@ public class PainelInicial {
     public PainelInicial(JanelaPrincipal janelaPrincipal){
     this.janelaPrincipal = janelaPrincipal;
     tratamentoDeEventos();
-
     }
 
 
@@ -34,6 +33,20 @@ public class PainelInicial {
             @Override
             public void actionPerformed (ActionEvent e) {
                 janelaPrincipal.mudaTela(1);
+            }
+        });
+
+        relatorioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                janelaPrincipal.mudaTela(2);
+            }
+        });
+
+        consultaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                janelaPrincipal.mudaTela(3);
             }
         });
 

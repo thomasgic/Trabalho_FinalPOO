@@ -8,14 +8,18 @@ import java.awt.*;
 
 public class JanelaPrincipal extends JFrame {
 private JanelaCadastros janelaCadastros;
+private JanelaRelatorios janelaRelatorios;
+private JanelaConsultas janelaConsultas;
 private PainelInicial painelInicial;
 private ACMETech acmeTech;
 int opc;
     public JanelaPrincipal(ACMETech acmeTech){
         super();
-
-        janelaCadastros = new JanelaCadastros(this, acmeTech);
         painelInicial = new PainelInicial(this);
+        janelaCadastros = new JanelaCadastros(this, acmeTech);
+        janelaRelatorios = new JanelaRelatorios(this, acmeTech);
+        janelaConsultas = new JanelaConsultas(this, acmeTech);
+
         this.acmeTech = acmeTech;
         BorderLayout layoutPrincipal = new BorderLayout();
         setLayout(layoutPrincipal);
@@ -41,6 +45,20 @@ int opc;
                 this.setTitle("Tela de cadastros");
                 this.setSize(800,300);
                 //aqui deu um bug que a tela congelava, então achei esses métodos.
+                this.revalidate();
+                this.repaint();
+                break;
+            case 2:
+                this.setContentPane(janelaRelatorios.getPrincipal());
+                this.setTitle("tela de relatórios");
+                this.setSize(800,500);
+                this.revalidate();
+                this.repaint();
+                break;
+            case 3:
+                this.setContentPane(janelaConsultas.getPrincipal());
+                this.setTitle("tela de consultas");
+                this.setSize(800,500);
                 this.revalidate();
                 this.repaint();
                 break;
