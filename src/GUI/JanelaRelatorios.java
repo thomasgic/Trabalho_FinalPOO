@@ -21,6 +21,7 @@ public class JanelaRelatorios {
     private ACMETech acmeTech;
 
     public JanelaRelatorios(JanelaPrincipal janelaPrincipal, ACMETech acmeTech){
+        super();
         this.acmeTech = acmeTech;
         this.janelaPrincipal = janelaPrincipal;
         voltarButton.addActionListener(new ActionListener() {

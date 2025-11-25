@@ -10,6 +10,7 @@ public class JanelaPrincipal extends JFrame {
 private JanelaCadastros janelaCadastros;
 private JanelaRelatorios janelaRelatorios;
 private JanelaConsultas janelaConsultas;
+private JanelaAlteraComprador janelaAlteraComprador;
 private PainelInicial painelInicial;
 private ACMETech acmeTech;
 int opc;
@@ -19,6 +20,8 @@ int opc;
         janelaCadastros = new JanelaCadastros(this, acmeTech);
         janelaRelatorios = new JanelaRelatorios(this, acmeTech);
         janelaConsultas = new JanelaConsultas(this, acmeTech);
+        janelaAlteraComprador = new JanelaAlteraComprador(this, acmeTech);
+
 
         this.acmeTech = acmeTech;
         BorderLayout layoutPrincipal = new BorderLayout();
@@ -59,6 +62,13 @@ int opc;
                 this.setContentPane(janelaConsultas.getPrincipal());
                 this.setTitle("tela de consultas");
                 this.setSize(800,500);
+                this.revalidate();
+                this.repaint();
+                break;
+            case 4:
+                this.setContentPane(janelaAlteraComprador.getPrincipal());
+                this.setTitle("tela de alterar comprador");
+                this.pack();
                 this.revalidate();
                 this.repaint();
                 break;

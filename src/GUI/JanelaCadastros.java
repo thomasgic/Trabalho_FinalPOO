@@ -19,6 +19,7 @@ public class JanelaCadastros {
 
 
     public JanelaCadastros(JanelaPrincipal janelaPrincipal, ACMETech acmeTech){
+        super();
         this.acmeTech = acmeTech;
         this.janelaPrincipal = janelaPrincipal;
         tratamentoDeEventos();

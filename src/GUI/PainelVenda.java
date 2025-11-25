@@ -29,6 +29,7 @@ public class PainelVenda extends JDialog {
     private ACMETech acmeTech;
 
     public PainelVenda (ACMETech acmeTech) {
+        super();
         this.acmeTech = acmeTech;
         setContentPane(principal);
         setModal(true);

@@ -19,6 +19,7 @@ public class PainelInicial {
     private JanelaPrincipal janelaPrincipal;
 
     public PainelInicial(JanelaPrincipal janelaPrincipal){
+    super();
     this.janelaPrincipal = janelaPrincipal;
     tratamentoDeEventos();
     }
@@ -54,6 +55,13 @@ public class PainelInicial {
             @Override
             public void actionPerformed (ActionEvent e) {
                 janelaPrincipal.dispose();
+            }
+        });
+
+        alterarDadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                janelaPrincipal.mudaTela(4);
             }
         });
     }

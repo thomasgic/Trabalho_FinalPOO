@@ -33,6 +33,7 @@ public class PainelTecnologia extends JDialog {
 
 
     public PainelTecnologia (ACMETech acmeTech) {
+        super();
         setContentPane(principal);
         setModal(true);
         this.acmeTech = acmeTech;

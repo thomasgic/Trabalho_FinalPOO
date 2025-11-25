@@ -28,6 +28,7 @@ public class PainelComprador extends JDialog {
     private ACMETech acmeTech;
 
     public PainelComprador (ACMETech acmeTech) {
+        super();
         setContentPane(contentPane);
         setModal(true);
         this.acmeTech = acmeTech;

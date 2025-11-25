@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JanelaConsultas extends JDialog{
+public class JanelaConsultas{
     private JPanel principal;
     private JButton maiorValorTecButton;
     private JButton compradorMaisVendasButton;
@@ -20,8 +20,6 @@ public class JanelaConsultas extends JDialog{
 
     public JanelaConsultas(JanelaPrincipal janelaPrincipal, ACMETech acmeTech){
         super();
-        setContentPane(principal);
-        setModal(true);
         this.acmeTech = acmeTech;
         this.janelaPrincipal = janelaPrincipal;
         voltarButton.addActionListener(new ActionListener() {

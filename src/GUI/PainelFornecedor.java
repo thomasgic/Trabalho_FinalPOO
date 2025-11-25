@@ -36,6 +36,7 @@ public class PainelFornecedor extends JDialog {
     private ACMETech acmeTech;
 
     public PainelFornecedor (ACMETech acmeTech) {
+        super();
         setContentPane(principal);
         setModal(true);
         this.acmeTech = acmeTech;
