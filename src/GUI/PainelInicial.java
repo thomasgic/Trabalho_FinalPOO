@@ -64,5 +64,26 @@ public class PainelInicial {
                 janelaPrincipal.mudaTela(4);
             }
         });
+
+        removeVendaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                janelaPrincipal.mudaTela(5);
+            }
+        });
+
+        salvaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+
+            }
+        });
+
+        carregaDadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+
+            }
+        });
     }
 }

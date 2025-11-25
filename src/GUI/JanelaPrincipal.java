@@ -72,6 +72,12 @@ int opc;
                 this.revalidate();
                 this.repaint();
                 break;
+            case 5:
+                PainelRemoverVenda removerVenda = new PainelRemoverVenda(acmeTech);
+                removerVenda.pack();
+                removerVenda.setLocationRelativeTo(null);
+                removerVenda.setVisible(true);
+
             }
         }
     }
