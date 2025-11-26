@@ -7,17 +7,20 @@ public class Comprador extends Participante implements Comparable<Comprador>, Se
     private static final long serialVersionUID = 1L;
     private String pais;
     private String email;
+    private int qtdVendas;
 
     public Comprador(long cod, String nome, String pais, String email) {
         super(cod, nome);
         this.pais = pais;
         this.email = email;
+        this.qtdVendas = 0;
     }
 
     public Comprador() {
         super();
         this.pais = "";
         this.email = "";
+        this.qtdVendas = 0;
     }
 
     public String getPais() {
@@ -34,6 +37,14 @@ public class Comprador extends Participante implements Comparable<Comprador>, Se
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getQtdVendas () {
+        return qtdVendas;
+    }
+
+    public void incrementaVenda(){
+        this.qtdVendas++;
     }
 
     @Override

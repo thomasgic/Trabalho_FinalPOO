@@ -24,7 +24,7 @@ public class CentralVendas implements Serializable {
         }
 
 
-        venda.calculaValorFinal(qtdVendasComprador);
+        venda.calculaValorFinal();
 
 
         venda.getTecnologia().setVendida(true);

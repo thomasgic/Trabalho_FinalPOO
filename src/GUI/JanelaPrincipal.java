@@ -11,7 +11,9 @@ private JanelaCadastros janelaCadastros;
 private JanelaRelatorios janelaRelatorios;
 private JanelaConsultas janelaConsultas;
 private JanelaAlteraComprador janelaAlteraComprador;
+private PainelSalvarArquivos painelSalvarArquivos;
 private PainelInicial painelInicial;
+
 private ACMETech acmeTech;
 int opc;
     public JanelaPrincipal(ACMETech acmeTech){
@@ -21,6 +23,7 @@ int opc;
         janelaRelatorios = new JanelaRelatorios(this, acmeTech);
         janelaConsultas = new JanelaConsultas(this, acmeTech);
         janelaAlteraComprador = new JanelaAlteraComprador(this, acmeTech);
+
 
 
         this.acmeTech = acmeTech;
@@ -79,7 +82,14 @@ int opc;
                 removerVenda.setVisible(true);
 
                 break;
+            case 6:
+                painelSalvarArquivos = new PainelSalvarArquivos(this);
+                painelSalvarArquivos.pack();
+                painelSalvarArquivos.setLocationRelativeTo(null);
+                painelSalvarArquivos.setVisible(true);
+                break;
             }
+
         }
         public ACMETech getAcmeTech() {
         return acmeTech;

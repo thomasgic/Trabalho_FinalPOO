@@ -11,12 +11,14 @@ public class ACMETech {
     private CentralCompradores centralCompradores;
     private CatalogoTecnologias catalogoTecnologias;
     private CentralVendas centralVendas;
+    private GerenciadorArquivos gerenciadorArquivos;
 
     public ACMETech(){
         centralFornecimento = new CentralFornecimento();
         centralCompradores = new CentralCompradores();
         catalogoTecnologias = new CatalogoTecnologias();
         centralVendas = new CentralVendas();
+        gerenciadorArquivos = new GerenciadorArquivos();
     }
 
     // ADICIONAR ESTE MÉTODO
@@ -65,25 +67,12 @@ public class ACMETech {
         return centralVendas;
     }
 
-    public boolean salvarDados() {
-        return GerenciadorArquivos.salvarTodosDados(
-                centralFornecimento,
-                catalogoTecnologias,
-                centralCompradores,
-                centralVendas
-        );
+    public boolean salvarDados(String nomeArquivo) {
+        return gerenciadorArquivos.salvarSistema(this, nomeArquivo);
+
     }
 
-    public boolean carregarDados() {
-        try {
-            centralFornecimento.setFornecedores(GerenciadorArquivos.carregarFornecedores());
-            catalogoTecnologias.setTecnologias(GerenciadorArquivos.carregarTecnologias());
-            centralCompradores.setCompradores(GerenciadorArquivos.carregarCompradores());
-            centralVendas.setVendas(GerenciadorArquivos.carregarVendas());
-            return true;
-        } catch (Exception e) {
-            System.err.println("Erro ao carregar dados: " + e.getMessage());
-            return false;
-        }
+    public boolean carregarDados(String nomeArquivo) {
+        return gerenciadorArquivos.carregarSistema(this, nomeArquivo);
     }
 }

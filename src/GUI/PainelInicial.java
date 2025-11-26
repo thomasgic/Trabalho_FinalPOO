@@ -75,24 +75,24 @@ public class PainelInicial {
         salvaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                if (janelaPrincipal.getAcmeTech().salvarDados()) {
-                    JOptionPane.showMessageDialog(null,
-                            "Dados salvos com sucesso!",
-                            "Sucesso",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Erro ao salvar dados!",
-                            "Erro",
-                            JOptionPane.ERROR_MESSAGE);
+//                if (janelaPrincipal.getAcmeTech().salvarDados()) {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Dados salvos com sucesso!",
+//                            "Sucesso",
+//                            JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Erro ao salvar dados!",
+//                            "Erro",
+//                            JOptionPane.ERROR_MESSAGE);
+                janelaPrincipal.mudaTela(6);
 
-            }}
-        });
+            }});
 
         carregaDadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                if (janelaPrincipal.getAcmeTech().carregarDados()) {
+                if (janelaPrincipal.getAcmeTech().carregarDados("jonataha")) {
                     JOptionPane.showMessageDialog(null,
                             "Dados carregados com sucesso!",
                             "Sucesso",
