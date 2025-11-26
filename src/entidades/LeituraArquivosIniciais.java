@@ -10,7 +10,7 @@ import java.util.Queue;
 public class LeituraArquivosIniciais {
 
     // Ler PARTICIPANTES (fornecedores E compradores)
-    public static void lerParticipantes(String nomeArquivo,
+    public void lerParticipantes(String nomeArquivo,
                                         CentralFornecimento centralFornecimento,
                                         CentralCompradores centralCompradores) {
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
@@ -49,7 +49,7 @@ public class LeituraArquivosIniciais {
     }
 
     // Ler TECNOLOGIAS
-    public static void lerTecnologias(String nomeArquivo,
+    public void lerTecnologias(String nomeArquivo,
                                       CatalogoTecnologias catalogoTecnologias,
                                       CentralFornecimento centralFornecimento) {
         try (BufferedReader br = new BufferedReader(new FileReader(nomeArquivo))) {
@@ -82,7 +82,7 @@ public class LeituraArquivosIniciais {
     }
 
     // Ler VENDAS em uma FILA
-    public static Queue<Venda> lerVendasEmFila(String nomeArquivo,
+    public Queue<Venda> lerVendasEmFila(String nomeArquivo,
                                                CentralCompradores centralCompradores,
                                                CatalogoTecnologias catalogoTecnologias) {
         Queue<Venda> filaVendas = new LinkedList<>();

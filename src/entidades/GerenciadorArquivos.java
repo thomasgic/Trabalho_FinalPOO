@@ -4,13 +4,13 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GerenciadorArquivos {
-    private static final String ARQUIVO_FORNECEDORES = "fornecedores.dat";
-    private static final String ARQUIVO_TECNOLOGIAS = "tecnologias.dat";
-    private static final String ARQUIVO_COMPRADORES = "compradores.dat";
-    private static final String ARQUIVO_VENDAS = "vendas.dat";
+    private final String ARQUIVO_FORNECEDORES = "fornecedores.dat";
+    private final String ARQUIVO_TECNOLOGIAS = "tecnologias.dat";
+    private final String ARQUIVO_COMPRADORES = "compradores.dat";
+    private final String ARQUIVO_VENDAS = "vendas.dat";
 
     // Salvar Fornecedores
-    public static boolean salvarFornecedores(ArrayList<Fornecedor> fornecedores) {
+    public boolean salvarFornecedores(ArrayList<Fornecedor> fornecedores) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_FORNECEDORES))) {
             oos.writeObject(fornecedores);
             return true;
@@ -22,7 +22,7 @@ public class GerenciadorArquivos {
 
     // Carregar Fornecedores
     @SuppressWarnings("unchecked")
-    public static ArrayList<Fornecedor> carregarFornecedores() {
+    public ArrayList<Fornecedor> carregarFornecedores() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_FORNECEDORES))) {
             return (ArrayList<Fornecedor>) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -35,7 +35,7 @@ public class GerenciadorArquivos {
     }
 
     // Salvar Tecnologias
-    public static boolean salvarTecnologias(ArrayList<Tecnologia> tecnologias) {
+    public boolean salvarTecnologias(ArrayList<Tecnologia> tecnologias) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_TECNOLOGIAS))) {
             oos.writeObject(tecnologias);
             return true;
@@ -47,7 +47,7 @@ public class GerenciadorArquivos {
 
     // Carregar Tecnologias
     @SuppressWarnings("unchecked")
-    public static ArrayList<Tecnologia> carregarTecnologias() {
+    public ArrayList<Tecnologia> carregarTecnologias() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_TECNOLOGIAS))) {
             return (ArrayList<Tecnologia>) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -60,7 +60,7 @@ public class GerenciadorArquivos {
     }
 
     // Salvar Compradores
-    public static boolean salvarCompradores(ArrayList<Comprador> compradores) {
+    public boolean salvarCompradores(ArrayList<Comprador> compradores) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_COMPRADORES))) {
             oos.writeObject(compradores);
             return true;
@@ -72,7 +72,7 @@ public class GerenciadorArquivos {
 
     // Carregar Compradores
     @SuppressWarnings("unchecked")
-    public static ArrayList<Comprador> carregarCompradores() {
+    public ArrayList<Comprador> carregarCompradores() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_COMPRADORES))) {
             return (ArrayList<Comprador>) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -85,7 +85,7 @@ public class GerenciadorArquivos {
     }
 
     // Salvar Vendas
-    public static boolean salvarVendas(ArrayList<Venda> vendas) {
+    public boolean salvarVendas(ArrayList<Venda> vendas) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_VENDAS))) {
             oos.writeObject(vendas);
             return true;
@@ -97,7 +97,7 @@ public class GerenciadorArquivos {
 
     // Carregar Vendas
     @SuppressWarnings("unchecked")
-    public static ArrayList<Venda> carregarVendas() {
+    public ArrayList<Venda> carregarVendas() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_VENDAS))) {
             return (ArrayList<Venda>) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -110,7 +110,7 @@ public class GerenciadorArquivos {
     }
 
     // Salvar TUDO
-    public static boolean salvarTodosDados(CentralFornecimento centralFornecimento,
+    public boolean salvarTodosDados(CentralFornecimento centralFornecimento,
                                            CatalogoTecnologias catalogoTecnologias,
                                            CentralCompradores centralCompradores,
                                            CentralVendas centralVendas) {

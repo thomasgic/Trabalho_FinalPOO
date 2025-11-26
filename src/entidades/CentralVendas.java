@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CentralVendas implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private final long serialVersionUID = 1L;
     private ArrayList<Venda> vendas;
 
     public CentralVendas() {

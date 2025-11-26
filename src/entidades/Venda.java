@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Venda implements Comparable<Venda>, Serializable {
-    private static final long serialVersionUID = 1L;
+    private final long serialVersionUID = 1L;
     private long numeroVenda;
     private Date dataVenda;
     private Comprador comprador;
