@@ -12,6 +12,7 @@ private JanelaRelatorios janelaRelatorios;
 private JanelaConsultas janelaConsultas;
 private JanelaAlteraComprador janelaAlteraComprador;
 private PainelSalvarArquivos painelSalvarArquivos;
+private PainelCarregaArquivoCSV painelCarregaArquivoCSV;
 private PainelInicial painelInicial;
 
 private ACMETech acmeTech;
@@ -88,6 +89,11 @@ int opc;
                 painelSalvarArquivos.setLocationRelativeTo(null);
                 painelSalvarArquivos.setVisible(true);
                 break;
+            case 7:
+                painelCarregaArquivoCSV = new PainelCarregaArquivoCSV(this);
+                painelCarregaArquivoCSV.pack();
+                painelCarregaArquivoCSV.setLocationRelativeTo(null);
+                painelCarregaArquivoCSV.setVisible(true);
             }
 
         }

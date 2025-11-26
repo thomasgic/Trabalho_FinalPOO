@@ -14,19 +14,15 @@ public class GerenciadorArquivos {
     public GerenciadorArquivos() {
     }
 
-    // ========================================================================
-    // MÉTODOS DE LEITURA (Usados tanto na Inicialização quanto no Carregar)
-    // ========================================================================
-
-    public void lerParticipantes(String nomeArquivo, CentralFornecimento cadForn, CentralCompradores cadComp) {
+    public boolean lerParticipantes(String nomeArquivo, CentralFornecimento centralFornecimento, CentralCompradores centralCompradores) {
         File arquivo = new File(nomeArquivo);
-        if (!arquivo.exists()) {
-            System.err.println("Arquivo " + nomeArquivo + " não encontrado.");
-            return;
-        }
-
+        if (!arquivo.exists()) return false;
         try (Scanner scanner = new Scanner(arquivo, StandardCharsets.UTF_8)) {
-            if (scanner.hasNextLine()) scanner.nextLine();
+            if (!scanner.hasNextLine()) return false;
+            String cabecalho = scanner.nextLine().trim();
+            if (!cabecalho.contains("tipo") && !cabecalho.contains("dadoExtra")) {
+                return false;
+            }
 
             while (scanner.hasNextLine()) {
                 String linha = scanner.nextLine().trim();
@@ -34,43 +30,48 @@ public class GerenciadorArquivos {
 
                 try {
                     String[] dados = linha.split(";");
-
                     long cod = Long.parseLong(dados[0]);
                     String nome = dados[1];
                     int tipo = Integer.parseInt(dados[2]);
-                    if (tipo == 1) { // Fornecedor [cite: 142-143]
-                        String dataStr = dados[3];
-                        String areaStr = dados[4];
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        Date fundacao = sdf.parse(dataStr);
-                        Area area = Area.valueOf(areaStr.toUpperCase());
-                        if (cadForn.verificaCod(cod) == null) {
-                            cadForn.CadastraFornecedor(new Fornecedor(nome, cod, area, fundacao));
-                        }
 
-                    } else if (tipo == 2) { // Comprador [cite: 142-143]
+                    if (tipo == 1) {
+                        String dataString = dados[3];
+                        String areaString = dados[4];
+                        SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
+                        Date fundacao = dataFormatada.parse(dataString);
+                        Area area = Area.valueOf(areaString.toUpperCase());
+
+                        if (centralFornecimento.verificaCod(cod) == null) {
+                            centralFornecimento.CadastraFornecedor(new Fornecedor(nome, cod, area, fundacao));
+                        }
+                    } else if (tipo == 2) {
                         String pais = dados[3];
                         String email = dados[4];
 
-                        if (cadComp.verificaCod(cod) == null) {
-                            cadComp.cadastraComprador(new Comprador(cod, nome, pais, email));
+                        if (centralCompradores.verificaCod(cod) == null) {
+                            centralCompradores.cadastraComprador(new Comprador(cod, nome, pais, email));
                         }
                     }
                 } catch (Exception e) {
-                    System.err.println("Erro ao ler linha participante: " + linha);
+                    System.err.println("erro inesperado");
                 }
             }
+            return true;
+
         } catch (IOException e) {
-            System.err.println("Erro IO Participantes: " + e.getMessage());
+            return false;
         }
     }
 
-    public void lerTecnologias(String nomeArquivo, CatalogoTecnologias cadTec, CentralFornecimento cadForn) {
+    public boolean lerTecnologias(String nomeArquivo, CatalogoTecnologias catalogoTecnologias, CentralFornecimento centralFornecimento) {
         File arquivo = new File(nomeArquivo);
-        if (!arquivo.exists()) return;
+        if (!arquivo.exists()) return false;
 
         try (Scanner scanner = new Scanner(arquivo, StandardCharsets.UTF_8)) {
-            if (scanner.hasNextLine()) scanner.nextLine();
+            if (!scanner.hasNextLine()) return false;
+
+            String cabecalho = scanner.nextLine().trim();
+            if (!cabecalho.contains("peso") && !cabecalho.contains("temperatura") && !cabecalho.contains("valorBase")) return false;
 
             while (scanner.hasNextLine()) {
                 String linha = scanner.nextLine().trim();
@@ -80,7 +81,7 @@ public class GerenciadorArquivos {
                     String[] dados = linha.split(";");
                     long id = Long.parseLong(dados[0]);
 
-                    if (cadTec.verificaId(id) == null) { // Evita duplicados
+                    if (catalogoTecnologias.verificaId(id) == null) {
                         String modelo = dados[1];
                         String descricao = dados[2];
                         double valor = Double.parseDouble(dados[3]);
@@ -89,27 +90,31 @@ public class GerenciadorArquivos {
                         long codForn = Long.parseLong(dados[6]);
 
                         Tecnologia t = new Tecnologia(id, modelo, descricao, valor, peso, temp);
-                        Fornecedor f = cadForn.verificaCod(codForn);
+                        Fornecedor f = centralFornecimento.verificaCod(codForn);
                         if (f != null) t.defineFornecedor(f);
 
-                        cadTec.cadastrarTecnologia(t);
+                        catalogoTecnologias.cadastrarTecnologia(t);
                     }
                 } catch (Exception e) {
-                    System.err.println("Erro ao ler tecnologia: " + linha);
+                    System.err.println("erro inesperado");
                 }
             }
+            return true;
         } catch (IOException e) {
-            System.err.println("Erro IO Tecnologias: " + e.getMessage());
+            return false;
         }
     }
 
-    public Queue<Venda> lerVendas(String nomeArquivo, CentralCompradores cadComp, CatalogoTecnologias cadTec) {
+    public Queue<Venda> lerVendas(String nomeArquivo, CentralCompradores centralCompradores, CatalogoTecnologias catalogoTecnologias) {
         Queue<Venda> fila = new LinkedList<>();
         File arquivo = new File(nomeArquivo);
         if (!arquivo.exists()) return fila;
 
         try (Scanner scanner = new Scanner(arquivo, StandardCharsets.UTF_8)) {
-            if (scanner.hasNextLine()) scanner.nextLine();
+            if (!scanner.hasNextLine()) return fila;
+
+            String cabecalho = scanner.nextLine().trim();
+            if (!cabecalho.contains("codComprador") && !cabecalho.contains("idTecnologia")) return fila;
 
             while (scanner.hasNextLine()) {
                 String linha = scanner.nextLine().trim();
@@ -118,40 +123,33 @@ public class GerenciadorArquivos {
                 try {
                     String[] dados = linha.split(";");
                     long num = Long.parseLong(dados[0]);
-                    String dataStr = dados[1];
-                    long codComp = Long.parseLong(dados[2]);
-                    long idTec = Long.parseLong(dados[3]);
+                    String dataString = dados[1];
+                    long codComprador = Long.parseLong(dados[2]);
+                    long idTecnologia = Long.parseLong(dados[3]);
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date data = sdf.parse(dataStr);
+                    SimpleDateFormat dataAjustada = new SimpleDateFormat("dd/MM/yyyy");
+                    Date data = dataAjustada.parse(dataString);
 
-                    Comprador c = cadComp.verificaCod(codComp);
-                    Tecnologia t = cadTec.verificaId(idTec);
+                    Comprador comprador = centralCompradores.verificaCod(codComprador);
+                    Tecnologia tecnologia = catalogoTecnologias.verificaId(idTecnologia);
 
-                    if (c != null && t != null) {
-                        fila.add(new Venda(num, data, c, t));
+                    if (comprador != null && tecnologia != null) {
+                        fila.add(new Venda(num, data, comprador, tecnologia));
                     }
                 } catch (Exception e) {
-                    System.err.println("Erro ao ler venda: " + linha);
+                    System.err.println("erro inesperado");
                 }
             }
         } catch (IOException e) {
-            System.err.println("Erro IO Vendas: " + e.getMessage());
         }
         return fila;
     }
 
-    // ========================================================================
-    // MÉTODOS DE SALVAR (Escrevem CSV igual ao formato do professor)
-    // ========================================================================
-
-    public boolean salvarSistema(ACMETech sistema, String nomeBase) {
-        // Gera 3 arquivos separados usando o nome que o usuário digitou como prefixo
-        // Ex: "TESTE-PARTICIPANTES.CSV"
+    public boolean salvarSistema(ACMETech acmeTech, String nomeBase) {
         try {
-            salvarParticipantesCSV(sistema, nomeBase + "-PARTICIPANTES.csv");
-            salvarTecnologiasCSV(sistema, nomeBase + "-TECNOLOGIAS.csv");
-            salvarVendasCSV(sistema, nomeBase + "-VENDAS.csv");
+            salvarParticipantesCSV(acmeTech, nomeBase + "-PARTICIPANTES.csv");
+            salvarTecnologiasCSV(acmeTech, nomeBase + "-TECNOLOGIAS.csv");
+            salvarVendasCSV(acmeTech, nomeBase + "-VENDAS.csv");
             return true;
         } catch (IOException e) {
             System.err.println("Erro ao salvar arquivos CSV: " + e.getMessage());
@@ -159,12 +157,12 @@ public class GerenciadorArquivos {
         }
     }
 
-    private void salvarParticipantesCSV(ACMETech sistema, String nomeArquivo) throws IOException {
+    private void salvarParticipantesCSV(ACMETech acmeTech, String nomeArquivo) throws IOException {
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(nomeArquivo), StandardCharsets.UTF_8))) {
             writer.println("cod;nome;tipo;dadoExtra1;dadoExtra2");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-            for (Fornecedor f : sistema.getCentralFornecimento().mostraFornecedores()) {
+            for (Fornecedor f : acmeTech.getCentralFornecimento().mostraFornecedores()) {
                 writer.printf("%d;%s;1;%s;%s%n",
                         f.getCod(),
                         f.getNome(),
@@ -172,8 +170,7 @@ public class GerenciadorArquivos {
                         f.getArea().toString());
             }
 
-            // 2. Escreve Compradores (Tipo 2)
-            for (Comprador c : sistema.getCentralCompradores().mostrarCompradores()) {
+            for (Comprador c : acmeTech.getCentralCompradores().mostrarCompradores()) {
                 writer.printf("%d;%s;2;%s;%s%n",
                         c.getCod(),
                         c.getNome(),
@@ -183,11 +180,11 @@ public class GerenciadorArquivos {
         }
     }
 
-    private void salvarTecnologiasCSV(ACMETech sistema, String nomeArquivo) throws IOException {
+    private void salvarTecnologiasCSV(ACMETech acmeTech, String nomeArquivo) throws IOException {
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(nomeArquivo), StandardCharsets.UTF_8))) {
             writer.println("id;modelo;descricao;valorBase;peso;temperatura;codFornecedor");
 
-            for (Tecnologia t : sistema.getCatalogoTecnologias().mostrarTecnologias()) {
+            for (Tecnologia t : acmeTech.getCatalogoTecnologias().mostrarTecnologias()) {
                 long codForn = (t.getFornecedor() != null) ? t.getFornecedor().getCod() : -1;
                 writer.printf("%d;%s;%s;%.2f;%.2f;%.2f;%d%n",
                         t.getId(),
@@ -201,45 +198,50 @@ public class GerenciadorArquivos {
         }
     }
 
-    private void salvarVendasCSV(ACMETech sistema, String nomeArquivo) throws IOException {
+    private void salvarVendasCSV(ACMETech acmeTech, String nomeArquivo) throws IOException {
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(nomeArquivo), StandardCharsets.UTF_8))) {
             writer.println("num;data;codComprador;idTecnologia");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
 
-            for (Venda v : sistema.getCentralVendas().mostraVendas()) {
+            for (Venda v : acmeTech.getCentralVendas().mostraVendas()) {
                 writer.printf("%d;%s;%d;%d%n",
                         v.getNumeroVenda(),
-                        sdf.format(v.getDataVenda()),
+                        dataFormatada.format(v.getDataVenda()),
                         v.getComprador().getCod(),
                         v.getTecnologia().getId());
             }
         }
     }
 
-    public boolean carregarSistema(ACMETech sistema, String nomeBase) {
-        String arqPart = nomeBase + "-PARTICIPANTES.csv";
-        String arqTec = nomeBase + "-TECNOLOGIAS.csv";
-        String arqVendas = nomeBase + "-VENDAS.csv";
-
-        File f = new File(arqPart);
-        if (!f.exists()) {
-            System.err.println("Arquivos de backup não encontrados para o nome: " + nomeBase);
-            return false;
-        }
-
-        lerParticipantes(arqPart, sistema.getCentralFornecimento(), sistema.getCentralCompradores());
-        lerTecnologias(arqTec, sistema.getCatalogoTecnologias(), sistema.getCentralFornecimento());
-        Queue<Venda> fila = lerVendas(arqVendas, sistema.getCentralCompradores(), sistema.getCatalogoTecnologias());
-
-        if (!fila.isEmpty()) {
-            for (Venda v : fila) {
-                if (sistema.getCentralVendas().verificaNumero(v.getNumeroVenda()) == null) {
-                    v.calculaValorFinal();
-                    sistema.getCentralVendas().cadastraVenda(v);
-                    v.getComprador().incrementaVenda();
-                }
+    public boolean carregarSistema(ACMETech acmeTech, String nomeBase) {
+        boolean encontrouAlgumArquivo = false;
+        String nomeArquivo = nomeBase + ".csv";
+        File arquivo = new File(nomeArquivo);
+        if (arquivo.exists()) {
+            if (lerParticipantes(nomeArquivo, acmeTech.getCentralFornecimento(), acmeTech.getCentralCompradores())) {
+                encontrouAlgumArquivo = true;
             }
+            if (lerTecnologias(nomeArquivo, acmeTech.getCatalogoTecnologias(), acmeTech.getCentralFornecimento())) {
+                encontrouAlgumArquivo = true;
+            }
+            Queue<Venda> fila = lerVendas(nomeArquivo, acmeTech.getCentralCompradores(), acmeTech.getCatalogoTecnologias());
+
+            if (!fila.isEmpty()) {
+                for (Venda v : fila) {
+                    if (acmeTech.getCentralVendas().verificaNumero(v.getNumeroVenda()) == null) {
+                        v.calculaValorFinal();
+                        acmeTech.getCentralVendas().cadastraVenda(v);
+                        if (v.getComprador() != null) {
+                            v.getComprador().incrementaVenda();
+                        }
+                    }
+                }
+                encontrouAlgumArquivo = true;
+            }
+        } else {
+            System.err.println("Arquivo não encontrado: " + nomeArquivo);
         }
-        return true;
+
+        return encontrouAlgumArquivo;
     }
 }

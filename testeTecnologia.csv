@@ -1,0 +1,5 @@
+id;modelo;descricao;valorBase;peso;temperatura;codFornecedor
+501;Portal Gun;Dispositivo de teletransporte;50000.99;2.5;30.0;100
+502;Sonic Screwdriver;Ferramenta multiuso;1500.50;0.3;15.0;300
+503;Batmobile;Veiculo tatico urbano;750000.00;2500.0;120.0;100
+504;Lightsaber;Sabre de luz elegante;8000.00;1.2;2000.0;300

@@ -92,17 +92,17 @@ public class PainelInicial {
         carregaDadosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                if (janelaPrincipal.getAcmeTech().carregarDados("jonataha")) {
-                    JOptionPane.showMessageDialog(null,
-                            "Dados carregados com sucesso!",
-                            "Sucesso",
-                            JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Erro ao carregar dados!",
-                            "Erro",
-                            JOptionPane.ERROR_MESSAGE);
-                }
+//                if (janelaPrincipal.getAcmeTech().carregarDados("jonataha")) {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Dados carregados com sucesso!",
+//                            "Sucesso",
+//                            JOptionPane.INFORMATION_MESSAGE);
+//                } else {
+//                    JOptionPane.showMessageDialog(null,
+//                            "Erro ao carregar dados!",
+//                            "Erro",
+//                            JOptionPane.ERROR_MESSAGE);
+                janelaPrincipal.mudaTela(7);
             }
         });
     }

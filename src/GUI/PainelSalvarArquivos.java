@@ -17,6 +17,7 @@ public class PainelSalvarArquivos extends JDialog {
     private JTextArea mensagemTA;
     private JLabel mensagemLabel;
     private JPanel areaMensagem;
+    private JPanel mostraMensagem;
     private JanelaPrincipal janelaPrincipal;
 
     public PainelSalvarArquivos(JanelaPrincipal janelaPrincipal) {

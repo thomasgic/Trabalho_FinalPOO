@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.PainelSalvarArquivos">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.PainelCarregaArquivoCSV">
   <grid id="cbd77" binding="principal" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="422" height="166"/>
+      <xy x="48" y="54" width="408" height="190"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="eac82" binding="instrucao" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="4094c" binding="instrucao" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="c4c0d" class="javax.swing.JLabel" binding="instrucaoLabel">
+          <component id="6e75b" class="javax.swing.JLabel" binding="instrucaoLabel">
             <constraints border-constraint="Center"/>
             <properties>
               <horizontalAlignment value="0"/>
@@ -24,7 +24,7 @@
           </component>
         </children>
       </grid>
-      <grid id="f992b" binding="digitacao" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="10">
+      <grid id="fa4b6" binding="digitacao" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="10">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -32,7 +32,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="280d0" class="javax.swing.JTextField" binding="nomeArquivoTF">
+          <component id="cb241" class="javax.swing.JTextField" binding="nomeArquivoTF">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -40,7 +40,7 @@
             </constraints>
             <properties/>
           </component>
-          <grid id="20e6b" binding="botoes" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="989af" binding="botoes" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -48,7 +48,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="424ec" class="javax.swing.JButton" binding="ConfirmaButton">
+              <component id="7d9c8" class="javax.swing.JButton" binding="ConfirmaButton">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -56,7 +56,7 @@
                   <text value="Confirmar"/>
                 </properties>
               </component>
-              <component id="27180" class="javax.swing.JButton" binding="FecharButton">
+              <component id="c6a67" class="javax.swing.JButton" binding="FecharButton">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -68,19 +68,19 @@
           </grid>
         </children>
       </grid>
-      <grid id="765d3" binding="mostraMensagem" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="bd425" binding="mostraMensagem" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <scrollpane id="f03c">
+          <scrollpane id="7d015">
             <constraints border-constraint="Center"/>
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e92de" class="javax.swing.JTextArea" binding="mensagemTA">
+              <component id="52d63" class="javax.swing.JTextArea" binding="mensagemTA">
                 <constraints/>
                 <properties>
                   <columns value="20"/>
@@ -90,14 +90,14 @@
           </scrollpane>
         </children>
       </grid>
-      <grid id="42123" binding="areaMensagem" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="4ba6c" binding="areaMensagem" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="aa10f" class="javax.swing.JLabel" binding="mensagemLabel">
+          <component id="3e764" class="javax.swing.JLabel" binding="mensagemLabel">
             <constraints border-constraint="South"/>
             <properties>
               <text value="MENSAGEM"/>
@@ -105,17 +105,17 @@
           </component>
         </children>
       </grid>
-      <grid id="c0fe3" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="2cd5a" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="4eb4c" layout-manager="BorderLayout" hgap="0" vgap="0">
+      <grid id="bdb80" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>

@@ -38,6 +38,7 @@ public class CatalogoTecnologias {
         }
         return resultado;
     }
+
     public Tecnologia tecnologiaMaiorValor(){
         if(tecnologias.isEmpty()){
             return null;
