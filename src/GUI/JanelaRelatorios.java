@@ -122,6 +122,7 @@ public class JanelaRelatorios {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                resultadoRelatorioTA.setText("");
                 janelaPrincipal.mudaTela(0);
             }
         });

@@ -162,6 +162,7 @@ public class JanelaConsultas {
         voltarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                resultadoConsultasTA.setText("");
                 janelaPrincipal.mudaTela(0);
             }
         });
