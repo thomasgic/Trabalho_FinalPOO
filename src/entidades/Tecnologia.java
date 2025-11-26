@@ -1,6 +1,8 @@
 package entidades;
 
-public class Tecnologia {
+import java.io.Serializable;
+
+public class Tecnologia implements Serializable {
     private long id;
     private Fornecedor fornecedor;
     private String Modelo;

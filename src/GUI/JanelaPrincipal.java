@@ -80,4 +80,7 @@ int opc;
 
             }
         }
+        public ACMETech getAcmeTech() {
+        return acmeTech;
+        }
     }

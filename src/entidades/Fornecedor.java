@@ -1,9 +1,10 @@
 package entidades;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Fornecedor extends Participante implements Comparable<Fornecedor> {
+public class Fornecedor extends Participante implements Comparable<Fornecedor>, Serializable {
     private Area area;
     private Date fundacao;
 

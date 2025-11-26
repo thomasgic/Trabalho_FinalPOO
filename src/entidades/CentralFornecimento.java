@@ -5,9 +5,12 @@ import java.util.Collections;
 
 public class CentralFornecimento {
     private ArrayList<Fornecedor> fornecedores;
+    private CentralCompradores centralCompradores;
 
     public CentralFornecimento(){
         fornecedores = new ArrayList<>();
+
+        centralCompradores = new CentralCompradores();
     }
 
     public boolean CadastraFornecedor(Fornecedor fornecedor){
@@ -24,6 +27,11 @@ public class CentralFornecimento {
             }
         }
         return fornecedorCod;
+    }
+
+    public void setFornecedores(ArrayList<Fornecedor> fornecedores) {
+        this.fornecedores = fornecedores;
+        Collections.sort(fornecedores);
     }
 
     public ArrayList<Fornecedor> mostraFornecedores(){
