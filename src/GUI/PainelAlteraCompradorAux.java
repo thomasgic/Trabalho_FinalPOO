@@ -21,6 +21,9 @@ public class PainelAlteraCompradorAux extends JDialog {
     private JTextArea MensagensTA;
     private JPanel mensagens;
     private JLabel mensagensLabel;
+    private JLabel nomeLabel;
+    private JLabel paisLabel;
+    private JLabel emailLabel;
     private ACMETech acmeTech;
     private Comprador comprador;
 
@@ -40,8 +43,8 @@ public class PainelAlteraCompradorAux extends JDialog {
         textField1.setText(comprador.getNome());
         textField2.setText(comprador.getPais());
         textField3.setText(comprador.getEmail());
-
         MensagensTA.setText("Dados atuais do comprador:\n" + comprador.geraDescricao());
+        instrucaoLabel.setText("insira os novos dados do comprador (" + comprador.getNome() + ")");
     }
 
     private void tratamentoEventos() {
@@ -50,18 +53,11 @@ public class PainelAlteraCompradorAux extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String nome = textField1.getText().trim();
-                    String cpf = textField2.getText().trim();
+                    String pais = textField2.getText().trim();
                     String email = textField3.getText().trim();
 
-                    if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty()) {
+                    if (nome.isEmpty() || pais.isEmpty() || email.isEmpty()) {
                         MensagensTA.setText("ERRO: Todos os campos devem ser preenchidos!");
-                        return;
-                    }
-
-                    // Validar CPF
-                    String cpfDigitos = cpf.replaceAll("[^0-9]", "");
-                    if (cpfDigitos.length() != 11) {
-                        MensagensTA.setText("ERRO: CPF deve ter 11 dígitos!");
                         return;
                     }
 
@@ -73,7 +69,7 @@ public class PainelAlteraCompradorAux extends JDialog {
 
                     // Atualizar dados do comprador
                     comprador.setNome(nome);
-                    comprador.setPais(cpfDigitos);
+                    comprador.setPais(pais);
                     comprador.setEmail(email);
 
                     MensagensTA.setText("Comprador alterado com sucesso!\n\n" +

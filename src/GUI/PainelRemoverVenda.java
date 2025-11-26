@@ -15,6 +15,7 @@ public class PainelRemoverVenda extends JDialog {
     private JTextArea textArea1;
     private JPanel mensagens;
     private JButton confirmarButton;
+    private JButton voltarButton;
     private ACMETech acmeTech;
 
     public PainelRemoverVenda(ACMETech acmeTech) {
@@ -22,6 +23,7 @@ public class PainelRemoverVenda extends JDialog {
         setModal(true);
         this.acmeTech = acmeTech;
         tratamentoEventos();
+
     }
 
     private void tratamentoEventos() {
@@ -74,6 +76,13 @@ public class PainelRemoverVenda extends JDialog {
                 } catch (Exception ex) {
                     textArea1.setText("ERRO: Algo deu errado!\n" + ex.getMessage());
                 }
+            }
+        });
+
+        voltarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                dispose();
             }
         });
     }
