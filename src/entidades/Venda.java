@@ -28,7 +28,6 @@ public class Venda implements Comparable<Venda>, Serializable {
         this.valorFinal = 0.0;
     }
 
-    // MÉTODO PRINCIPAL - CALCULA VALOR FINAL
     public double calculaValorFinal(int qtdVendasComprador) {
         if (tecnologia == null || tecnologia.getFornecedor() == null) {
             this.valorFinal = 0;
@@ -99,10 +98,6 @@ public class Venda implements Comparable<Venda>, Serializable {
 
     public double getValorFinal() {
         return valorFinal;
-    }
-
-    public void setValorFinal(double valorFinal) {
-        this.valorFinal = valorFinal;
     }
 
     public String geraDescricaoVenda() {
