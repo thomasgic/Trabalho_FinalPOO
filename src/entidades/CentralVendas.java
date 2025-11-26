@@ -1,11 +1,13 @@
 package entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CentralVendas {
+public class CentralVendas implements Serializable {
+    private static final long serialVersionUID = 1L;
     private ArrayList<Venda> vendas;
 
     public CentralVendas() {
@@ -13,6 +15,20 @@ public class CentralVendas {
     }
 
     public boolean cadastraVenda(Venda venda) {
+        
+        int qtdVendasComprador = 0;
+        for (Venda v : vendas) {
+            if (v.getComprador().getCod() == venda.getComprador().getCod()) {
+                qtdVendasComprador++;
+            }
+        }
+
+
+        venda.calculaValorFinal(qtdVendasComprador);
+
+
+        venda.getTecnologia().setVendida(true);
+
         vendas.add(venda);
         Collections.sort(vendas);
         return true;
@@ -30,6 +46,8 @@ public class CentralVendas {
     public boolean removeVenda(long numero) {
         Venda venda = verificaNumero(numero);
         if (venda != null) {
+            // Desmarcar tecnologia como vendida
+            venda.getTecnologia().setVendida(false);
             vendas.remove(venda);
             return true;
         }
@@ -39,11 +57,6 @@ public class CentralVendas {
     public ArrayList<Venda> mostraVendas() {
         Collections.sort(vendas);
         return vendas;
-    }
-
-    public void setVendas(ArrayList<Venda> vendas) {
-        this.vendas = vendas;
-        Collections.sort(vendas);
     }
 
     public Venda vendaMaiorValor() {
@@ -85,5 +98,10 @@ public class CentralVendas {
         }
 
         return null;
+    }
+
+    public void setVendas(ArrayList<Venda> vendas) {
+        this.vendas = vendas;
+        Collections.sort(this.vendas);
     }
 }

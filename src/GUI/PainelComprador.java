@@ -38,49 +38,45 @@ public class PainelComprador extends JDialog {
 
     public void tratamentoDeEventos(){
         confirmarButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                try{
+                try {
                     String nome = campoDigitaNome.getText();
                     String email = campoDigitaEmail.getText();
                     String codTexto = campoDigitaCod.getText();
-                    String cpf = campoDigitaPais.getText();
+                    String pais = campoDigitaPais.getText(); // Agora é país mesmo
 
-                    if(nome.isEmpty() || email.isEmpty() || codTexto.isEmpty() || cpf.isEmpty()){
-                        areaMensagens.setText("ERRO: Preencha os campos vazios");
-                    }else{
+                    if (nome.isEmpty() || email.isEmpty() || codTexto.isEmpty() || pais.isEmpty()) {
+                        areaMensagens.setText("ERRO: Preencha todos os campos!");
+                    } else {
                         long codLong = Long.parseLong(codTexto);
 
-                        if(acmeTech.getCentralCompradores().verificaCod(codLong) != null){
-                            areaMensagens.setText("ERRO: código já existente");
+                        if (acmeTech.getCentralCompradores().verificaCod(codLong) != null) {
+                            areaMensagens.setText("ERRO: código já existente!");
                             campoDigitaCod.setText("");
-                        }else{
-                            String cpfDigitos = cpf.replaceAll("[^0-9]", "");
-                            if(cpfDigitos.length() != 11){
-                                throw new IllegalArgumentException("CPF deve ser 11 digitos");
-                            }
-                            if(!email.contains("@") || !email.toLowerCase().contains(".com")) {
-                                throw new IllegalArgumentException("Email invalido!");
+                        } else {
+
+                            if (!email.contains("@")) {
+                                areaMensagens.setText("ERRO: Email inválido!");
+                                return;
                             }
 
-                                Comprador comprador = new Comprador(codLong, nome, cpfDigitos, email);
-                                if(acmeTech.getCentralCompradores().cadastraComprador(comprador)){
+                            Comprador comprador = new Comprador(codLong, nome, pais, email);
+                            if (acmeTech.getCentralCompradores().cadastraComprador(comprador)) {
                                 areaMensagens.setText("Comprador cadastrado com sucesso!");
-
-                                campoDigitaEmail.setText("");
+                                // Limpar campos
+                                campoDigitaNome.setText("");
                                 campoDigitaEmail.setText("");
                                 campoDigitaCod.setText("");
                                 campoDigitaPais.setText("");
-
                             }
                         }
                     }
-
-                }catch (NumberFormatException ex){
-                    areaMensagens.setText("ERRO: código apenas com valores numéricos!");
-                }catch (IllegalArgumentException ex){
-                    areaMensagens.setText("ERRO: " +ex.getMessage());
+                } catch (NumberFormatException ex) {
+                    areaMensagens.setText("Erro: código apenas com valores numéricos!");
+                } catch (Exception ex) {
+                    areaMensagens.setText("Erro: algo deu errado! " + ex.getMessage());
                 }
-
             }
         });
         limparButton.addActionListener(new ActionListener() {

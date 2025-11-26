@@ -38,7 +38,7 @@ public class PainelAlteraCompradorAux extends JDialog {
 
     private void preencherCampos() {
         textField1.setText(comprador.getNome());
-        textField2.setText(comprador.getCpf());
+        textField2.setText(comprador.getPais());
         textField3.setText(comprador.getEmail());
 
         MensagensTA.setText("Dados atuais do comprador:\n" + comprador.geraDescricao());
@@ -73,7 +73,7 @@ public class PainelAlteraCompradorAux extends JDialog {
 
                     // Atualizar dados do comprador
                     comprador.setNome(nome);
-                    comprador.setCpf(cpfDigitos);
+                    comprador.setPais(cpfDigitos);
                     comprador.setEmail(email);
 
                     MensagensTA.setText("Comprador alterado com sucesso!\n\n" +

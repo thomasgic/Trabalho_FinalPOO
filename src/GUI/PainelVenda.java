@@ -54,10 +54,12 @@ public class PainelVenda extends JDialog {
             CompradoresCB.addItem(c.getCod() + " - " + c.getNome());
         }
 
-        // Carregar tecnologias
+        // Carregar APENAS tecnologias disponíveis (não vendidas)
         ArrayList<Tecnologia> tecnologias = acmeTech.getCatalogoTecnologias().mostrarTecnologias();
         for (Tecnologia t : tecnologias) {
-            tecnologiaCB.addItem(t.getId() + " - " + t.getModelo());
+            if (!t.isVendida()) { // ADICIONAR ESTA VERIFICAÇÃO
+                tecnologiaCB.addItem(t.getId() + " - " + t.getModelo());
+            }
         }
     }
 
@@ -105,11 +107,20 @@ public class PainelVenda extends JDialog {
                         return;
                     }
 
+                    // VERIFICAR SE A TECNOLOGIA JÁ FOI VENDIDA
+                    if (tecnologia.isVendida()) {
+                        mensagensTA.setText("ERRO: Esta tecnologia já foi vendida!");
+                        return;
+                    }
+
                     Venda venda = new Venda(numeroVenda, data, comprador, tecnologia);
 
                     if (acmeTech.getCentralVendas().cadastraVenda(venda)) {
-                        mensagensTA.setText("Venda cadastrada com sucesso!\n" + venda.geraDescricaoVenda());
+                        mensagensTA.setText("Venda cadastrada com sucesso!\n" +
+                                venda.toString() +
+                                "\nValor calculado: R$ " + String.format("%.2f", venda.getValorFinal()));
                         limparCampos();
+                        carregarComboBoxes(); // Atualizar ComboBox (tecnologias vendidas não devem aparecer)
                     }
 
                 } catch (ParseException ex) {
@@ -121,7 +132,6 @@ public class PainelVenda extends JDialog {
                 }
             }
         });
-
         mostrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

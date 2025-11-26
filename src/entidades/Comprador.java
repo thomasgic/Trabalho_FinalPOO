@@ -4,27 +4,28 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Comprador extends Participante implements Comparable<Comprador>, Serializable {
-    private String cpf;
+    private static final long serialVersionUID = 1L;
+    private String pais;  // MUDOU DE CPF PARA PAÍS
     private String email;
 
-    public Comprador(long cod, String nome, String cpf, String email) {
+    public Comprador(long cod, String nome, String pais, String email) {
         super(cod, nome);
-        this.cpf = cpf;
+        this.pais = pais;
         this.email = email;
     }
 
     public Comprador() {
         super();
-        this.cpf = "";
+        this.pais = "";
         this.email = "";
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getPais() {
+        return pais;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
     public String getEmail() {
@@ -37,10 +38,7 @@ public class Comprador extends Participante implements Comparable<Comprador>, Se
 
     @Override
     public String geraDescricao() {
-        return "nome: " + getNome() +
-                ";código: " + getCod() +
-                ";CPF: " + cpf +
-                ";email: " + email;
+        return getNome() + ";" + getCod() + ";" + pais + ";" + email;
     }
 
     @Override
@@ -63,7 +61,7 @@ public class Comprador extends Participante implements Comparable<Comprador>, Se
 
     @Override
     public String toString() {
-        return String.format("Cód: %d | Nome: %s | CPF: %s | Email: %s",
-                getCod(), getNome(), cpf, email);
+        return String.format("Cód: %d | Nome: %s | País: %s | Email: %s",
+                getCod(), getNome(), pais, email);
     }
 }

@@ -3,35 +3,68 @@ package aplicacao;
 import GUI.JanelaPrincipal;
 import entidades.*;
 
-//Classe de aplicação
+import java.util.Queue;
 
 public class ACMETech {
     private JanelaPrincipal janelaPrincipal;
     private CentralFornecimento centralFornecimento;
     private CentralCompradores centralCompradores;
-    private CentralVendas centralVendas;
     private CatalogoTecnologias catalogoTecnologias;
+    private CentralVendas centralVendas;
 
     public ACMETech(){
-        centralVendas = new CentralVendas();
         centralFornecimento = new CentralFornecimento();
         centralCompradores = new CentralCompradores();
         catalogoTecnologias = new CatalogoTecnologias();
+        centralVendas = new CentralVendas();
+    }
+
+    // ADICIONAR ESTE MÉTODO
+    public void inicializar() {
+        // Ler participantes (fornecedores e compradores)
+        LeituraArquivosIniciais.lerParticipantes("PARTICIPANTESENTRADA.CSV",
+                centralFornecimento,
+                centralCompradores);
+
+        // Ler tecnologias
+        LeituraArquivosIniciais.lerTecnologias("TECNOLOGIASENTRADA.CSV",
+                catalogoTecnologias,
+                centralFornecimento);
+
+        // Ler vendas em fila
+        Queue<Venda> filaVendas = LeituraArquivosIniciais.lerVendasEmFila("VENDASENTRADA.CSV",
+                centralCompradores,
+                catalogoTecnologias);
+
+        // Processar vendas da fila
+        while (!filaVendas.isEmpty()) {
+            Venda venda = filaVendas.poll();
+            centralVendas.cadastraVenda(venda);
+        }
+
+        System.out.println("Inicialização concluída!");
     }
 
     public void executar(){
         janelaPrincipal = new JanelaPrincipal(this);
     }
 
-    public CentralFornecimento getCentralFornecimento () {
+    public CentralFornecimento getCentralFornecimento() {
         return centralFornecimento;
     }
-    public CentralCompradores getCentralCompradores () {return centralCompradores;}
-    public CentralVendas getCentralVendas () {return centralVendas;}
-    public CatalogoTecnologias getCatalogoTecnologias() {return catalogoTecnologias;}
 
+    public CentralCompradores getCentralCompradores() {
+        return centralCompradores;
+    }
 
-    // ADICIONAR ESTES MÉTODOS:
+    public CatalogoTecnologias getCatalogoTecnologias() {
+        return catalogoTecnologias;
+    }
+
+    public CentralVendas getCentralVendas() {
+        return centralVendas;
+    }
+
     public boolean salvarDados() {
         return GerenciadorArquivos.salvarTodosDados(
                 centralFornecimento,
@@ -54,4 +87,3 @@ public class ACMETech {
         }
     }
 }
-

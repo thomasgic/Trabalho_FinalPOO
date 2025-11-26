@@ -10,6 +10,7 @@ public class Tecnologia implements Serializable {
     private double valorBase;
     private double peso;
     private double temperatura;
+    private boolean vendida;
 
     public Tecnologia (long id, String modelo, String descricao, double valorBase, double peso, double temperatura) {
         this.id = id;
@@ -18,12 +19,19 @@ public class Tecnologia implements Serializable {
         this.valorBase = valorBase;
         this.peso = peso;
         this.temperatura = temperatura;
+        this.vendida = false;
     }
 
     public long getId () {
         return id;
     }
+    public boolean isVendida() {
+        return vendida;
+    }
 
+    public void setVendida(boolean vendida) {
+        this.vendida = vendida;
+    }
     public void setId (long id) {
         this.id = id;
     }
