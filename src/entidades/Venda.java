@@ -27,40 +27,40 @@ public class Venda implements Comparable<Venda>, Serializable {
         this.valorFinal = 0.0;
     }
 
-    public double calculaValorFinal() {
+    public double calculaValorFinal(int qtdVendasComprador) {
+        if (tecnologia == null || tecnologia.getFornecedor() == null) {
+            this.valorFinal = 0;
+            return 0;
+        }
+
         double valorBase = tecnologia.getValorBase();
-        double valorComAcrescimo = 0.0;
-        if (tecnologia.getFornecedor() != null) {
-            Area area = tecnologia.getFornecedor().getArea();
+        Area area = tecnologia.getFornecedor().getArea();
 
-            switch (area) {
-                case TI:
-                    valorComAcrescimo = valorBase * 1.20;
-                    break;
-                case ANDROIDES:
-                    valorComAcrescimo = valorBase * 1.15;
-                    break;
-                case EMERGENTE:
-                    valorComAcrescimo = valorBase * 1.25;
-                    break;
-                case ALIMENTOS:
-                    valorComAcrescimo = valorBase * 1.10;
-                    break;
-                default:
-                    valorComAcrescimo = valorBase;
-            }
-        } else {
-            valorComAcrescimo = valorBase;
+        // Acréscimo baseado na área do fornecedor
+        double acrescimo = 0;
+        switch (area) {
+            case TI:
+                acrescimo = 0.20; // 20%
+                break;
+            case ANDROIDES:
+                acrescimo = 0.15; // 15%
+                break;
+            case EMERGENTE:
+                acrescimo = 0.25; // 25%
+                break;
+            case ALIMENTOS:
+                acrescimo = 0.10; // 10%
+                break;
         }
-        int qtdVendasAnteriores = comprador.getQtdVendas();
 
-        double percentualDesconto = qtdVendasAnteriores * 0.01;
-        if (percentualDesconto > 0.10) {
-            percentualDesconto = 0.10;
-        }
-        double valorDoDesconto = valorComAcrescimo * percentualDesconto;
-        this.valorFinal = valorComAcrescimo - valorDoDesconto;
-        return this.valorFinal;
+        double valorComAcrescimo = valorBase * (1 + acrescimo);
+
+        // Desconto cumulativo (1% por venda, máximo 10%)
+        double descontoPorcentagem = Math.min(qtdVendasComprador * 0.01, 0.10);
+        double valorComDesconto = valorComAcrescimo * (1 - descontoPorcentagem);
+
+        this.valorFinal = valorComDesconto;
+        return valorFinal;
     }
 
     public long getNumeroVenda() {

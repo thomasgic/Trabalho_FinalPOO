@@ -114,7 +114,7 @@ public class PainelVenda extends JDialog {
                     }
 
                     Venda venda = new Venda(numeroVenda, data, comprador, tecnologia);
-
+                    venda.getComprador().incrementaVenda();
                     if (acmeTech.getCentralVendas().cadastraVenda(venda)) {
                         mensagensTA.setText("Venda cadastrada com sucesso!\n" +
                                 venda.toString() +

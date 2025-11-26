@@ -229,7 +229,7 @@ public class GerenciadorArquivos {
             if (!fila.isEmpty()) {
                 for (Venda v : fila) {
                     if (acmeTech.getCentralVendas().verificaNumero(v.getNumeroVenda()) == null) {
-                        v.calculaValorFinal();
+                        v.calculaValorFinal(v.getComprador().getQtdVendas());
                         acmeTech.getCentralVendas().cadastraVenda(v);
                         if (v.getComprador() != null) {
                             v.getComprador().incrementaVenda();

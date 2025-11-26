@@ -15,20 +15,16 @@ public class CentralVendas implements Serializable {
     }
 
     public boolean cadastraVenda(Venda venda) {
-        
-        int qtdVendasComprador = 0;
+
+        int qtdVendasComprador = venda.getComprador().getQtdVendas();
         for (Venda v : vendas) {
             if (v.getComprador().getCod() == venda.getComprador().getCod()) {
-                qtdVendasComprador++;
+                v.getComprador().incrementaVenda();
             }
         }
 
-
-        venda.calculaValorFinal();
-
-
+        venda.calculaValorFinal(qtdVendasComprador);
         venda.getTecnologia().setVendida(true);
-
         vendas.add(venda);
         Collections.sort(vendas);
         return true;
@@ -61,7 +57,6 @@ public class CentralVendas implements Serializable {
 
     public Venda vendaMaiorValor() {
         if (vendas.isEmpty()) return null;
-
         Venda maior = vendas.get(0);
         for (Venda v : vendas) {
             if (v.getValorFinal() > maior.getValorFinal()) {
@@ -73,9 +68,7 @@ public class CentralVendas implements Serializable {
 
     public Comprador compradorComMaisVendas() {
         if (vendas.isEmpty()) return null;
-
         Map<Long, Integer> contagem = new HashMap<>();
-
         for (Venda v : vendas) {
             long codComprador = v.getComprador().getCod();
             contagem.put(codComprador, contagem.getOrDefault(codComprador, 0) + 1);
@@ -83,7 +76,6 @@ public class CentralVendas implements Serializable {
 
         long codMaior = -1;
         int maxVendas = 0;
-
         for (Map.Entry<Long, Integer> entry : contagem.entrySet()) {
             if (entry.getValue() > maxVendas) {
                 maxVendas = entry.getValue();
