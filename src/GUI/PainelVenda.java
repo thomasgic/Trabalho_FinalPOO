@@ -57,7 +57,9 @@ public class PainelVenda extends JDialog {
         // Carregar APENAS tecnologias disponíveis (não vendidas)
         ArrayList<Tecnologia> tecnologias = acmeTech.getCatalogoTecnologias().mostrarTecnologias();
         for (Tecnologia t : tecnologias) {
+            if (!t.isVendida()) { // ADICIONAR ESTA VERIFICAÇÃO
                 tecnologiaCB.addItem(t.getId() + " - " + t.getModelo());
+            }
         }
     }
 
