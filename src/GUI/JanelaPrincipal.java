@@ -78,6 +78,7 @@ int opc;
                 removerVenda.setLocationRelativeTo(null);
                 removerVenda.setVisible(true);
 
+                break;
             }
         }
         public ACMETech getAcmeTech() {

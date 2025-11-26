@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class Comprador extends Participante implements Comparable<Comprador>, Serializable {
     private static final long serialVersionUID = 1L;
-    private String pais;  // MUDOU DE CPF PARA PAÍS
+    private String pais;
     private String email;
 
     public Comprador(long cod, String nome, String pais, String email) {

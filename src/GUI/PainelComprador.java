@@ -44,7 +44,7 @@ public class PainelComprador extends JDialog {
                     String nome = campoDigitaNome.getText();
                     String email = campoDigitaEmail.getText();
                     String codTexto = campoDigitaCod.getText();
-                    String pais = campoDigitaPais.getText(); // Agora é país mesmo
+                    String pais = campoDigitaPais.getText();
 
                     if (nome.isEmpty() || email.isEmpty() || codTexto.isEmpty() || pais.isEmpty()) {
                         areaMensagens.setText("ERRO: Preencha todos os campos!");
@@ -64,7 +64,6 @@ public class PainelComprador extends JDialog {
                             Comprador comprador = new Comprador(codLong, nome, pais, email);
                             if (acmeTech.getCentralCompradores().cadastraComprador(comprador)) {
                                 areaMensagens.setText("Comprador cadastrado com sucesso!");
-                                // Limpar campos
                                 campoDigitaNome.setText("");
                                 campoDigitaEmail.setText("");
                                 campoDigitaCod.setText("");
